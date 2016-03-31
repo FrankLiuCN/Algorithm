@@ -18,10 +18,13 @@ namespace Algorithm
             InitializeComponent();
         }
         List<SortModel> modelArr;
+        SortModel tempModel;
         int panelH = 50;
         int modelW = 40;
         Thread quickSorkThread;
         Sort s = new Sort();
+        Font myFont = new Font("Verdana", 12);
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -49,7 +52,7 @@ namespace Algorithm
 
         }
 
-        private void GenerateList()
+        private void GenerateList(int startX = 10)
         {
             try
             {
@@ -64,9 +67,10 @@ namespace Algorithm
                     model.Value = int.Parse(strArr[i]);
                     model.BackgroundColor = Color.Green;
                     model.OriginalColor = Color.Green;
-                    model.Rect = new Rectangle(i * (modelW + 10) + 10, (panel1.Height - (int)(model.Value * percent) - 2), modelW, (int)(model.Value * percent));
+                    model.Rect = new Rectangle(i * (modelW + 10) + startX, (panel1.Height - (int)(model.Value * percent) - 2), modelW, (int)(model.Value * percent));
                     modelArr.Add(model);
                 }
+
             }
             catch (Exception ex)
             {
@@ -93,13 +97,19 @@ namespace Algorithm
             {
                 lock (modelArr)
                 {
-                    Font myFont = new Font("Verdana", 12);
-                    //Graphics gp = panel1.CreateGraphics();
                     Graphics gp = e.Graphics;
+                    if (tempModel != null)
+                    {
+                        gp.FillRectangle(new SolidBrush(tempModel.BackgroundColor), tempModel.Rect); //填充
+                        gp.DrawString(tempModel.Value.ToString(), myFont, new SolidBrush(Color.Black), new RectangleF(tempModel.Rect.X + (modelW - myFont.Size * tempModel.Value.ToString().Length) / 2, tempModel.Rect.Y - myFont.Height, (myFont.Size + 2) * tempModel.Value.ToString().Length, myFont.Height));
+                    }
                     foreach (SortModel item in modelArr)
                     {
-                        gp.FillRectangle(new SolidBrush(item.BackgroundColor), item.Rect); //填充
-                        gp.DrawString(item.Value.ToString(), myFont, new SolidBrush(Color.Black), new RectangleF(item.Rect.X + (modelW - myFont.Size * item.Value.ToString().Length) / 2, item.Rect.Y - myFont.Height, (myFont.Size + 2) * item.Value.ToString().Length, myFont.Height));
+                        if (item.Value != null)
+                        {
+                            gp.FillRectangle(new SolidBrush(item.BackgroundColor), item.Rect); //填充
+                            gp.DrawString(item.Value.ToString(), myFont, new SolidBrush(Color.Black), new RectangleF(item.Rect.X + (modelW - myFont.Size * item.Value.ToString().Length) / 2, item.Rect.Y - myFont.Height, (myFont.Size + 2) * item.Value.ToString().Length, myFont.Height));
+                        }
                     }
                     gp.Flush();
                 }
@@ -113,6 +123,7 @@ namespace Algorithm
                 quickSorkThread.Abort();
             }
             GenerateList();
+
             s.ProgressChanged += s_ProgressChanged;
             quickSorkThread = new Thread(() => s.QuickSort(modelArr, 0, modelArr.Count - 1));
             quickSorkThread.Start();
@@ -166,6 +177,14 @@ namespace Algorithm
             GenerateList();
             s.ProgressChanged += s_ProgressChanged;
             quickSorkThread = new Thread(() => s.BubbleSort(modelArr));
+            quickSorkThread.Start();
+        }
+
+        private void btnInsertionSort_Click(object sender, EventArgs e)
+        {
+            GenerateList(modelW + 20);
+            s.ProgressChanged += s_ProgressChanged;
+            quickSorkThread = new Thread(() => s.InsertionSort(modelArr, out tempModel));
             quickSorkThread.Start();
         }
 

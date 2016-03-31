@@ -9,7 +9,7 @@ namespace Algorithm
 {
     public class SortModel
     {
-        public int Value { get; set; }
+        public int ? Value { get; set; }
 
         public Color OriginalColor { get; set; }
         public Color BackgroundColor { get; set; }

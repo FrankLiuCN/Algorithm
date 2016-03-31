@@ -103,7 +103,39 @@ namespace Algorithm
             arr[0].BackgroundColor = Color.Pink;
             OnProgressChangedAndSleep(null);
         }
-        protected void OnProgressChangedAndSleep(int? baseVal, int sleep = 1000)
+
+        public void InsertionSort(List<SortModel> arr, out SortModel temp)
+        {
+            temp = null;
+            OnProgressChangedAndSleep(null);
+            for (int i = 1; i < arr.Count; i++)
+            {
+                temp = arr[i];
+                int prevX = arr[i].Rect.X;
+                temp.Rect = new Rectangle(10, temp.Rect.Y, temp.Rect.Width, temp.Rect.Height);
+                temp.BackgroundColor = Color.Plum;
+                OnProgressChangedAndSleep(null);
+                int j = i;
+                while (j > 0 && temp.Value < arr[j - 1].Value)
+                {
+                    arr[j - 1].BackgroundColor = Color.Red;
+                    Blink(arr[j - 1]);
+                    Rectangle moveRect = new Rectangle(prevX, arr[j - 1].Rect.Y, arr[j - 1].Rect.Width, arr[j - 1].Rect.Height);
+                    prevX = arr[j - 1].Rect.X;
+                    arr[j] = arr[j - 1];
+                    arr[j].Rect = moveRect;
+                    arr[j].BackgroundColor = Color.Green;
+                    j--;
+                    OnProgressChangedAndSleep(null);
+                }
+
+                temp.Rect = new Rectangle(prevX, temp.Rect.Y, temp.Rect.Width, temp.Rect.Height);
+                temp.BackgroundColor = Color.Green;
+                arr[j] = temp;
+                OnProgressChangedAndSleep(null);
+            }
+        }
+        protected void OnProgressChangedAndSleep(int? baseVal, int sleep = 1500)
         {
             if (ProgressChanged != null)
             {
