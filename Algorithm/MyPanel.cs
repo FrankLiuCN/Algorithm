@@ -7,11 +7,13 @@ using System.Windows.Forms;
 
 namespace Algorithm
 {
-    class MyPanel:Panel
+    class MyPanel : Panel
     {
         public MyPanel()
         {
-            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.SupportsTransparentBackColor, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);//不擦除背景
+            this.SetStyle(ControlStyles.UserPaint, true);//使用自定义重绘
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);//双缓冲       
         }
     }
 }

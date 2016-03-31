@@ -16,3 +16,11 @@ C:\Frank\SourceCode\Algorithm\Algorithm\obj\Debug\Algorithm.csproj.GenerateResou
 C:\Frank\SourceCode\Algorithm\Algorithm\bin\Debug\Algorithm.exe
 C:\Frank\SourceCode\Algorithm\Algorithm\bin\Debug\Algorithm.pdb
 F:\Algorithm\Algorithm\obj\Debug\Algorithm.csprojResolveAssemblyReference.cache
+C:\Frank\SourceCode\Algorithm-master\Algorithm\bin\Debug\Algorithm.exe.config
+C:\Frank\SourceCode\Algorithm-master\Algorithm\obj\Debug\Algorithm.exe
+C:\Frank\SourceCode\Algorithm-master\Algorithm\obj\Debug\Algorithm.pdb
+C:\Frank\SourceCode\Algorithm-master\Algorithm\bin\Debug\Algorithm.exe
+C:\Frank\SourceCode\Algorithm-master\Algorithm\bin\Debug\Algorithm.pdb
+C:\Frank\SourceCode\Algorithm-master\Algorithm\obj\Debug\Algorithm.Form1.resources
+C:\Frank\SourceCode\Algorithm-master\Algorithm\obj\Debug\Algorithm.Properties.Resources.resources
+C:\Frank\SourceCode\Algorithm-master\Algorithm\obj\Debug\Algorithm.csproj.GenerateResource.Cache

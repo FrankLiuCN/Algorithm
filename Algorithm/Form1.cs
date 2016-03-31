@@ -49,6 +49,31 @@ namespace Algorithm
 
         }
 
+        private void GenerateList()
+        {
+            try
+            {
+                List<string> strArr = textBox1.Text.Split(' ').ToList<string>();
+                modelArr = new List<SortModel>();
+                int max = GetMax(strArr);
+                float percent = (float)(panel1.Height - panelH) / (float)max;
+
+                for (int i = 0; i < strArr.Count; i++)
+                {
+                    SortModel model = new SortModel();
+                    model.Value = int.Parse(strArr[i]);
+                    model.BackgroundColor = Color.Green;
+                    model.OriginalColor = Color.Green;
+                    model.Rect = new Rectangle(i * (modelW + 10) + 10, (panel1.Height - (int)(model.Value * percent) - 2), modelW, (int)(model.Value * percent));
+                    modelArr.Add(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private int GetMax(List<string> strArr)
         {
             int max = int.Parse(strArr[0]);
@@ -69,7 +94,8 @@ namespace Algorithm
                 lock (modelArr)
                 {
                     Font myFont = new Font("Verdana", 12);
-                    Graphics gp = panel1.CreateGraphics();
+                    //Graphics gp = panel1.CreateGraphics();
+                    Graphics gp = e.Graphics;
                     foreach (SortModel item in modelArr)
                     {
                         gp.FillRectangle(new SolidBrush(item.BackgroundColor), item.Rect); //填充
@@ -82,7 +108,11 @@ namespace Algorithm
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            if (quickSorkThread != null && quickSorkThread.ThreadState == ThreadState.Running)
+            {
+                quickSorkThread.Abort();
+            }
+            GenerateList();
             s.ProgressChanged += s_ProgressChanged;
             quickSorkThread = new Thread(() => s.QuickSort(modelArr, 0, modelArr.Count - 1));
             quickSorkThread.Start();
@@ -91,18 +121,18 @@ namespace Algorithm
         void s_ProgressChanged(int? baseVal)
         {
             PanelRefresh();
-            BaseValRefresh(baseVal);
+            //BaseValRefresh(baseVal);
         }
 
         private void BaseValRefresh(int? baseVal)
         {
-            if (baseVal==null)
+            if (baseVal == null)
             {
                 return;
             }
             this.Invoke(new Action(delegate()
             {
-                lblBaseVal.Text = "当前基准数为:" + baseVal;
+                //lblBaseVal.Text = "当前基准数为:" + baseVal;
             }));
 
 
@@ -129,6 +159,11 @@ namespace Algorithm
 
         private void btnBubbleSort_Click(object sender, EventArgs e)
         {
+            if (quickSorkThread != null && quickSorkThread.ThreadState == ThreadState.Running)
+            {
+                quickSorkThread.Abort();
+            }
+            GenerateList();
             s.ProgressChanged += s_ProgressChanged;
             quickSorkThread = new Thread(() => s.BubbleSort(modelArr));
             quickSorkThread.Start();

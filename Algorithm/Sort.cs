@@ -30,7 +30,7 @@ namespace Algorithm
             }
             SortModel baseVal = arr[left];
             int i = left, j = right;
-            arr[left].BackgroundColor = Color.Red;
+            arr[left].BackgroundColor = Color.Plum;
             OnProgressChangedAndSleep(baseVal.Value);
             while (i < j)
             {
@@ -52,6 +52,7 @@ namespace Algorithm
                     }
                     i++;
                     arr[i].BackgroundColor = Color.Red;
+                    arr[left].BackgroundColor = Color.Plum;
                     OnProgressChangedAndSleep(baseVal.Value);
                 }
                 if (i < j)
@@ -92,10 +93,15 @@ namespace Algorithm
                         OnProgressChangedAndSleep(null);
                     }
                     arr[j].BackgroundColor = Color.Green;
-                    arr[j + 1].BackgroundColor = Color.Green;
+                    if (j == arr.Count - i - 2)
+                        arr[j + 1].BackgroundColor = Color.Pink;
+                    else
+                        arr[j + 1].BackgroundColor = Color.Green;
                     OnProgressChangedAndSleep(null);
                 }
             }
+            arr[0].BackgroundColor = Color.Pink;
+            OnProgressChangedAndSleep(null);
         }
         protected void OnProgressChangedAndSleep(int? baseVal, int sleep = 1000)
         {

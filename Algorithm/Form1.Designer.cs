@@ -29,63 +29,51 @@
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new Algorithm.MyPanel();
             this.button2 = new System.Windows.Forms.Button();
-            this.lblBaseVal = new System.Windows.Forms.Label();
             this.btnBubbleSort = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(39, 12);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(58, 18);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(876, 21);
+            this.textBox1.Size = new System.Drawing.Size(1312, 28);
             this.textBox1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(39, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "生成列表";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.lblBaseVal);
-            this.panel1.Location = new System.Drawing.Point(39, 78);
+            this.panel1.Location = new System.Drawing.Point(58, 117);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(876, 406);
+            this.panel1.Size = new System.Drawing.Size(1313, 608);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(126, 41);
+            this.button2.Location = new System.Drawing.Point(58, 65);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(112, 34);
             this.button2.TabIndex = 3;
             this.button2.Text = "快速排序";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // lblBaseVal
-            // 
-            this.lblBaseVal.Location = new System.Drawing.Point(14, 10);
-            this.lblBaseVal.Name = "lblBaseVal";
-            this.lblBaseVal.Size = new System.Drawing.Size(10, 12);
-            this.lblBaseVal.TabIndex = 4;
-            // 
             // btnBubbleSort
             // 
-            this.btnBubbleSort.Location = new System.Drawing.Point(213, 41);
+            this.btnBubbleSort.Location = new System.Drawing.Point(189, 65);
+            this.btnBubbleSort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBubbleSort.Name = "btnBubbleSort";
-            this.btnBubbleSort.Size = new System.Drawing.Size(75, 23);
+            this.btnBubbleSort.Size = new System.Drawing.Size(112, 34);
             this.btnBubbleSort.TabIndex = 5;
             this.btnBubbleSort.Text = "冒泡排序";
             this.btnBubbleSort.UseVisualStyleBackColor = true;
@@ -93,18 +81,18 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 515);
+            this.ClientSize = new System.Drawing.Size(1438, 772);
             this.Controls.Add(this.btnBubbleSort);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "算法演示";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,10 +101,8 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel1;
+        private MyPanel panel1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label lblBaseVal;
         private System.Windows.Forms.Button btnBubbleSort;
     }
 }
