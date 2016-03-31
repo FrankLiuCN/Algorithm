@@ -188,5 +188,13 @@ namespace Algorithm
             quickSorkThread.Start();
         }
 
+        private void btnShellSort_Click(object sender, EventArgs e)
+        {
+            GenerateList(modelW + 20);
+            s.ProgressChanged += s_ProgressChanged;
+            quickSorkThread = new Thread(() => s.ShellSort(modelArr, out tempModel));
+            quickSorkThread.Start();
+        }
+
     }
 }

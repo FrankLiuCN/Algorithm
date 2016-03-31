@@ -110,30 +110,77 @@ namespace Algorithm
             OnProgressChangedAndSleep(null);
             for (int i = 1; i < arr.Count; i++)
             {
-                temp = arr[i];
-                int prevX = arr[i].Rect.X;
-                temp.Rect = new Rectangle(10, temp.Rect.Y, temp.Rect.Width, temp.Rect.Height);
-                temp.BackgroundColor = Color.Plum;
+                arr[i].BackgroundColor = Color.Red;
                 OnProgressChangedAndSleep(null);
-                int j = i;
-                while (j > 0 && temp.Value < arr[j - 1].Value)
+                if (arr[i - 1].Value > arr[i].Value)
                 {
-                    arr[j - 1].BackgroundColor = Color.Red;
-                    Blink(arr[j - 1]);
-                    Rectangle moveRect = new Rectangle(prevX, arr[j - 1].Rect.Y, arr[j - 1].Rect.Width, arr[j - 1].Rect.Height);
-                    prevX = arr[j - 1].Rect.X;
-                    arr[j] = arr[j - 1];
-                    arr[j].Rect = moveRect;
-                    arr[j].BackgroundColor = Color.Green;
-                    j--;
+                    temp = arr[i];
+                    int prevX = arr[i].Rect.X;
+                    temp.Rect = new Rectangle(10, temp.Rect.Y, temp.Rect.Width, temp.Rect.Height);
+                    temp.BackgroundColor = Color.Plum;
+                    OnProgressChangedAndSleep(null);
+                    int j = i;
+                    while (j > 0 && temp.Value < arr[j - 1].Value)
+                    {
+                        arr[j - 1].BackgroundColor = Color.Red;
+                        Blink(arr[j - 1]);
+                        Rectangle moveRect = new Rectangle(prevX, arr[j - 1].Rect.Y, arr[j - 1].Rect.Width, arr[j - 1].Rect.Height);
+                        prevX = arr[j - 1].Rect.X;
+                        arr[j] = arr[j - 1];
+                        arr[j].Rect = moveRect;
+                        arr[j].BackgroundColor = Color.Green;
+                        j--;
+                        OnProgressChangedAndSleep(null);
+                    }
+
+                    temp.Rect = new Rectangle(prevX, temp.Rect.Y, temp.Rect.Width, temp.Rect.Height);
+                    temp.BackgroundColor = Color.Green;
+                    arr[j] = temp;
                     OnProgressChangedAndSleep(null);
                 }
-
-                temp.Rect = new Rectangle(prevX, temp.Rect.Y, temp.Rect.Width, temp.Rect.Height);
-                temp.BackgroundColor = Color.Green;
-                arr[j] = temp;
-                OnProgressChangedAndSleep(null);
+                else
+                {
+                    arr[i].BackgroundColor = Color.Green;
+                    OnProgressChangedAndSleep(null);
+                }
             }
+        }
+
+        public void ShellSort(List<SortModel> arr, out SortModel temp)
+        {
+            temp = null;
+            OnProgressChangedAndSleep(null);
+            int gap = arr.Count / 2;
+            while (gap > 0)
+            {
+                for (int i = gap; i < arr.Count; i++)
+                {
+                    temp = arr[i];
+                    int prevX = arr[i].Rect.X;
+                    temp.Rect = new Rectangle(10, temp.Rect.Y, temp.Rect.Width, temp.Rect.Height);
+                    temp.BackgroundColor = Color.Plum;
+                    OnProgressChangedAndSleep(null);
+                    int j = i;
+                    for (j = i - gap; j >= 0 && temp.Value < arr[j].Value; j = j - gap)
+                    {
+                        arr[j].BackgroundColor = Color.Red;
+                        Blink(arr[j]);
+                        Rectangle moveRect = new Rectangle(prevX, arr[j].Rect.Y, arr[j].Rect.Width, arr[j].Rect.Height);
+                        prevX = arr[j].Rect.X;
+                        arr[j + gap] = arr[j];
+                        arr[j + gap].Rect = moveRect;
+                        arr[j + gap].BackgroundColor = Color.Green;
+                        OnProgressChangedAndSleep(null);
+                    }
+
+                    temp.Rect = new Rectangle(prevX, temp.Rect.Y, temp.Rect.Width, temp.Rect.Height);
+                    temp.BackgroundColor = Color.Green;
+                    arr[j+gap] = temp;
+                    OnProgressChangedAndSleep(null);
+                }
+                gap = gap / 2;
+            }
+
         }
         protected void OnProgressChangedAndSleep(int? baseVal, int sleep = 1500)
         {
