@@ -103,7 +103,11 @@ namespace Algorithm
             arr[0].BackgroundColor = Color.Pink;
             OnProgressChangedAndSleep(null);
         }
-
+        /// <summary>
+        /// 直接插入排序
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="temp"></param>
         public void InsertionSort(List<SortModel> arr, out SortModel temp)
         {
             temp = null;
@@ -145,7 +149,11 @@ namespace Algorithm
                 }
             }
         }
-
+        /// <summary>
+        /// 希尔排序
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="temp"></param>
         public void ShellSort(List<SortModel> arr, out SortModel temp)
         {
             temp = null;
@@ -194,6 +202,104 @@ namespace Algorithm
                 gap = gap / 2;
             }
 
+        }
+        /// <summary>
+        /// 简单选择排序
+        /// </summary>
+        /// <param name="arr"></param>
+        public void SimpleSelectionSort(List<SortModel> arr)
+        {
+            for (int i = 0; i < arr.Count; i++)
+            {
+                int j = i, min = i;
+                arr[j].BackgroundColor = Color.Plum;
+                OnProgressChangedAndSleep(null);
+                for (; j < arr.Count - 1; j++)
+                {
+                    arr[j + 1].BackgroundColor = Color.Red;
+                    OnProgressChangedAndSleep(null);
+
+                    if (arr[j + 1].Value < arr[min].Value)
+                    {
+                        arr[min].BackgroundColor = Color.Green;
+                        min = j + 1;
+                        arr[min].BackgroundColor = Color.Plum;
+                    }
+                    else
+                    {
+                        arr[j + 1].BackgroundColor = Color.Green;
+                    }
+                    OnProgressChangedAndSleep(null);
+                }
+
+                arr[i].BackgroundColor = Color.Red;
+                Blink(arr[i], arr[min]);
+                arr[i].BackgroundColor = Color.Green;
+                arr[min].BackgroundColor = Color.Pink;
+                if (i != j)
+                {
+                    Swap(arr, i, min);
+                }
+                OnProgressChangedAndSleep(null);
+            }
+        }
+        /// <summary>
+        /// 二元选择排序
+        /// </summary>
+        /// <param name="arr"></param>
+        public void BinarySelectionSort(List<SortModel> arr)
+        {
+            int i = 0;
+            for (; i < arr.Count / 2; i++)
+            {
+                int min = i, max = i, j = i;
+                arr[min].BackgroundColor = Color.Plum;
+                OnProgressChangedAndSleep(null);
+                for (; j < arr.Count - i - 1; j++)
+                {
+                    arr[j + 1].BackgroundColor = Color.Red;
+                    OnProgressChangedAndSleep(null);
+                    if (arr[j + 1].Value < arr[min].Value)
+                    {
+                        arr[min].BackgroundColor = Color.Green;
+                        min = j + 1;
+                        arr[max].BackgroundColor = Color.Peru;
+                        arr[min].BackgroundColor = Color.Plum;
+                    }
+                    else if (arr[j + 1].Value > arr[max].Value)
+                    {
+                        arr[max].BackgroundColor = Color.Green;
+                        arr[min].BackgroundColor = Color.Plum;
+                        max = j + 1;
+                        arr[max].BackgroundColor = Color.Peru;
+                    }
+                    else
+                    {
+                        arr[j + 1].BackgroundColor = Color.Green;
+                    }
+                    OnProgressChangedAndSleep(null);
+                }
+                arr[i].BackgroundColor = Color.Red;
+                Blink(arr[i], arr[min]);
+                arr[i].BackgroundColor = Color.Green;
+                arr[min].BackgroundColor = Color.Pink;
+                if (i != min)
+                {
+                    Swap(arr, i, min);
+                }
+                OnProgressChangedAndSleep(null);
+                arr[arr.Count - i - 1].BackgroundColor = Color.Red;
+                Blink(arr[arr.Count - i - 1], arr[max]);
+                arr[arr.Count - i - 1].BackgroundColor = Color.Green;
+                arr[max].BackgroundColor = Color.Pink;
+                if (arr.Count - 1 != max)
+                {
+                    Swap(arr, arr.Count - i - 1, max);
+                }
+                OnProgressChangedAndSleep(null);
+            }
+            arr[i].BackgroundColor = Color.Pink;
+            OnProgressChangedAndSleep(null);
         }
         protected void OnProgressChangedAndSleep(int? baseVal, int sleep = 1500)
         {

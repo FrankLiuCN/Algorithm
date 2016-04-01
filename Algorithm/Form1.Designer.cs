@@ -32,8 +32,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnBubbleSort = new System.Windows.Forms.Button();
             this.btnInsertionSort = new System.Windows.Forms.Button();
-            this.panel1 = new Algorithm.MyPanel();
             this.btnShellSort = new System.Windows.Forms.Button();
+            this.btnSimpleSelectionSort = new System.Windows.Forms.Button();
+            this.panel1 = new Algorithm.MyPanel();
+            this.btnBinarySelectionSort = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -75,6 +77,26 @@
             this.btnInsertionSort.UseVisualStyleBackColor = true;
             this.btnInsertionSort.Click += new System.EventHandler(this.btnInsertionSort_Click);
             // 
+            // btnShellSort
+            // 
+            this.btnShellSort.Location = new System.Drawing.Point(305, 43);
+            this.btnShellSort.Name = "btnShellSort";
+            this.btnShellSort.Size = new System.Drawing.Size(75, 23);
+            this.btnShellSort.TabIndex = 7;
+            this.btnShellSort.Text = "希尔排序";
+            this.btnShellSort.UseVisualStyleBackColor = true;
+            this.btnShellSort.Click += new System.EventHandler(this.btnShellSort_Click);
+            // 
+            // btnSimpleSelectionSort
+            // 
+            this.btnSimpleSelectionSort.Location = new System.Drawing.Point(386, 43);
+            this.btnSimpleSelectionSort.Name = "btnSimpleSelectionSort";
+            this.btnSimpleSelectionSort.Size = new System.Drawing.Size(98, 23);
+            this.btnSimpleSelectionSort.TabIndex = 8;
+            this.btnSimpleSelectionSort.Text = "简单选择排序";
+            this.btnSimpleSelectionSort.UseVisualStyleBackColor = true;
+            this.btnSimpleSelectionSort.Click += new System.EventHandler(this.btnSimpleSelectionSort_Click);
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -87,21 +109,23 @@
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // btnShellSort
+            // btnBinarySelectionSort
             // 
-            this.btnShellSort.Location = new System.Drawing.Point(305, 43);
-            this.btnShellSort.Name = "btnShellSort";
-            this.btnShellSort.Size = new System.Drawing.Size(75, 23);
-            this.btnShellSort.TabIndex = 7;
-            this.btnShellSort.Text = "希尔排序";
-            this.btnShellSort.UseVisualStyleBackColor = true;
-            this.btnShellSort.Click += new System.EventHandler(this.btnShellSort_Click);
+            this.btnBinarySelectionSort.Location = new System.Drawing.Point(490, 43);
+            this.btnBinarySelectionSort.Name = "btnBinarySelectionSort";
+            this.btnBinarySelectionSort.Size = new System.Drawing.Size(98, 23);
+            this.btnBinarySelectionSort.TabIndex = 9;
+            this.btnBinarySelectionSort.Text = "二元选择排序";
+            this.btnBinarySelectionSort.UseVisualStyleBackColor = true;
+            this.btnBinarySelectionSort.Click += new System.EventHandler(this.btnBinarySelectionSort_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 515);
+            this.Controls.Add(this.btnBinarySelectionSort);
+            this.Controls.Add(this.btnSimpleSelectionSort);
             this.Controls.Add(this.btnShellSort);
             this.Controls.Add(this.btnInsertionSort);
             this.Controls.Add(this.btnBubbleSort);
@@ -125,6 +149,8 @@
         private System.Windows.Forms.Button btnBubbleSort;
         private System.Windows.Forms.Button btnInsertionSort;
         private System.Windows.Forms.Button btnShellSort;
+        private System.Windows.Forms.Button btnSimpleSelectionSort;
+        private System.Windows.Forms.Button btnBinarySelectionSort;
     }
 }
 

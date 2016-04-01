@@ -196,5 +196,21 @@ namespace Algorithm
             quickSorkThread.Start();
         }
 
+        private void btnSimpleSelectionSort_Click(object sender, EventArgs e)
+        {
+            GenerateList();
+            s.ProgressChanged += s_ProgressChanged;
+            quickSorkThread = new Thread(() => s.SimpleSelectionSort(modelArr));
+            quickSorkThread.Start();
+        }
+
+        private void btnBinarySelectionSort_Click(object sender, EventArgs e)
+        {
+            GenerateList();
+            s.ProgressChanged += s_ProgressChanged;
+            quickSorkThread = new Thread(() => s.BinarySelectionSort(modelArr));
+            quickSorkThread.Start();
+        }
+
     }
 }
