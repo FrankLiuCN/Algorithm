@@ -19,47 +19,35 @@ namespace Algorithm
         }
         List<SortModel> modelArr;
         SortModel tempModel;
-        int panelH = 50;
+        int modelH = 50;
         int modelW = 40;
-        Thread quickSorkThread;
+
+        Thread SorkThread;
         Sort s = new Sort();
         Font myFont = new Font("Verdana", 12);
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ThreadStart(Action callBack)
         {
-            try
+            if (SorkThread != null)
             {
-                List<string> strArr = textBox1.Text.Split(' ').ToList<string>();
-                modelArr = new List<SortModel>();
-                int max = GetMax(strArr);
-                float percent = (float)(panel1.Height - panelH) / (float)max;
-
-                for (int i = 0; i < strArr.Count; i++)
-                {
-                    SortModel model = new SortModel();
-                    model.Value = int.Parse(strArr[i]);
-                    model.BackgroundColor = Color.Green;
-                    model.OriginalColor = Color.Green;
-                    model.Rect = new Rectangle(i * (modelW + 10) + 10, (panel1.Height - (int)(model.Value * percent) - 2), modelW, (int)(model.Value * percent));
-                    modelArr.Add(model);
-                }
-                panel1.Refresh();
+                SorkThread.Abort();
+                SorkThread = null;
+                tempModel = null;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+            s.ProgressChanged += s_ProgressChanged;
+            SorkThread = new Thread(() => callBack());
+            SorkThread.Start();
         }
-
-        private void GenerateList(int startX = 10)
+        private void GenerateList(int startX = 10, int? panelHeight = null)
         {
             try
             {
+                if (panelHeight == null)
+                    panelHeight = panel1.Height;
                 List<string> strArr = textBox1.Text.Split(' ').ToList<string>();
                 modelArr = new List<SortModel>();
                 int max = GetMax(strArr);
-                float percent = (float)(panel1.Height - panelH) / (float)max;
+                float percent = (float)(panelHeight - modelH) / (float)max;
 
                 for (int i = 0; i < strArr.Count; i++)
                 {
@@ -67,7 +55,7 @@ namespace Algorithm
                     model.Value = int.Parse(strArr[i]);
                     model.BackgroundColor = Color.Green;
                     model.OriginalColor = Color.Green;
-                    model.Rect = new Rectangle(i * (modelW + 10) + startX, (panel1.Height - (int)(model.Value * percent) - 2), modelW, (int)(model.Value * percent));
+                    model.Rect = new Rectangle(i * (modelW + 10) + startX, ((int)panelHeight - (int)(model.Value * percent) - 2), modelW, (int)(model.Value * percent));
                     modelArr.Add(model);
                 }
 
@@ -118,15 +106,11 @@ namespace Algorithm
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (quickSorkThread != null && quickSorkThread.ThreadState == ThreadState.Running)
-            {
-                quickSorkThread.Abort();
-            }
             GenerateList();
-
-            s.ProgressChanged += s_ProgressChanged;
-            quickSorkThread = new Thread(() => s.QuickSort(modelArr, 0, modelArr.Count - 1));
-            quickSorkThread.Start();
+            ThreadStart(() =>
+            {
+                s.QuickSort(modelArr, 0, modelArr.Count - 1);
+            });
         }
 
         void s_ProgressChanged(int? baseVal)
@@ -162,54 +146,64 @@ namespace Algorithm
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (quickSorkThread != null)
+            if (SorkThread != null)
             {
-                quickSorkThread.Abort();
+                SorkThread.Abort();
             }
         }
 
         private void btnBubbleSort_Click(object sender, EventArgs e)
         {
-            if (quickSorkThread != null && quickSorkThread.ThreadState == ThreadState.Running)
-            {
-                quickSorkThread.Abort();
-            }
             GenerateList();
-            s.ProgressChanged += s_ProgressChanged;
-            quickSorkThread = new Thread(() => s.BubbleSort(modelArr));
-            quickSorkThread.Start();
+            ThreadStart(() =>
+            {
+                s.BubbleSort(modelArr);
+            });
         }
 
         private void btnInsertionSort_Click(object sender, EventArgs e)
         {
             GenerateList(modelW + 20);
-            s.ProgressChanged += s_ProgressChanged;
-            quickSorkThread = new Thread(() => s.InsertionSort(modelArr, out tempModel));
-            quickSorkThread.Start();
+            ThreadStart(() =>
+            {
+                s.InsertionSort(modelArr, out tempModel);
+            });
         }
 
         private void btnShellSort_Click(object sender, EventArgs e)
         {
             GenerateList(modelW + 20);
-            s.ProgressChanged += s_ProgressChanged;
-            quickSorkThread = new Thread(() => s.ShellSort(modelArr, out tempModel));
-            quickSorkThread.Start();
+            ThreadStart(() =>
+            {
+                s.ShellSort(modelArr, out tempModel);
+            });
         }
 
         private void btnSimpleSelectionSort_Click(object sender, EventArgs e)
         {
             GenerateList();
-            s.ProgressChanged += s_ProgressChanged;
-            quickSorkThread = new Thread(() => s.SimpleSelectionSort(modelArr));
-            quickSorkThread.Start();
+            ThreadStart(() =>
+            {
+                s.SimpleSelectionSort(modelArr);
+            });
         }
 
         private void btnBinarySelectionSort_Click(object sender, EventArgs e)
         {
             GenerateList();
-            s.ProgressChanged += s_ProgressChanged;
-            quickSorkThread = new Thread(() => s.BinarySelectionSort(modelArr));
-            quickSorkThread.Start();
+            ThreadStart(() =>
+            {
+                s.BinarySelectionSort(modelArr);
+            });
+        }
+
+        private void btnMergeSort_Click(object sender, EventArgs e)
+        {
+            GenerateList(panelHeight: panel1.Height / 2);
+            ThreadStart(() =>
+            {
+                s.MergeSort(modelArr);
+            });
         }
 
     }

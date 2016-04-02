@@ -301,7 +301,24 @@ namespace Algorithm
             arr[i].BackgroundColor = Color.Pink;
             OnProgressChangedAndSleep(null);
         }
-        protected void OnProgressChangedAndSleep(int? baseVal, int sleep = 1500)
+        /// <summary>
+        /// 归并排序
+        /// </summary>
+        /// <param name="arr"></param>
+        public void MergeSort(List<SortModel> arr, int fist, int last,out List<SortModel> tempArr)
+        {
+            tempArr = null;
+            if (fist<last)
+            {
+                int mid = (fist + last) / 2;
+                MergeSort(arr,fist, mid,out tempArr);
+                MergeSort(arr, mid + 1, last,out tempArr);
+                tempArr = new List<SortModel>();
+                int i = fist, j = mid;
+            }
+        }
+
+        protected void OnProgressChangedAndSleep(int? baseVal, int sleep = 1000)
         {
             if (ProgressChanged != null)
             {

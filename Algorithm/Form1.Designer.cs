@@ -36,6 +36,7 @@
             this.btnSimpleSelectionSort = new System.Windows.Forms.Button();
             this.panel1 = new Algorithm.MyPanel();
             this.btnBinarySelectionSort = new System.Windows.Forms.Button();
+            this.btnMergeSort = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -119,11 +120,22 @@
             this.btnBinarySelectionSort.UseVisualStyleBackColor = true;
             this.btnBinarySelectionSort.Click += new System.EventHandler(this.btnBinarySelectionSort_Click);
             // 
+            // btnMergeSort
+            // 
+            this.btnMergeSort.Location = new System.Drawing.Point(594, 43);
+            this.btnMergeSort.Name = "btnMergeSort";
+            this.btnMergeSort.Size = new System.Drawing.Size(75, 23);
+            this.btnMergeSort.TabIndex = 10;
+            this.btnMergeSort.Text = "归并排序";
+            this.btnMergeSort.UseVisualStyleBackColor = true;
+            this.btnMergeSort.Click += new System.EventHandler(this.btnMergeSort_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 515);
+            this.Controls.Add(this.btnMergeSort);
             this.Controls.Add(this.btnBinarySelectionSort);
             this.Controls.Add(this.btnSimpleSelectionSort);
             this.Controls.Add(this.btnShellSort);
@@ -151,6 +163,7 @@
         private System.Windows.Forms.Button btnShellSort;
         private System.Windows.Forms.Button btnSimpleSelectionSort;
         private System.Windows.Forms.Button btnBinarySelectionSort;
+        private System.Windows.Forms.Button btnMergeSort;
     }
 }
 
